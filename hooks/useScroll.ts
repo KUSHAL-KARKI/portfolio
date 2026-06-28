@@ -9,12 +9,8 @@ export const useScroll = (sectionIds: string[], threshold: number = 0.5) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const newId = entry.target.id;
-            
-            // 1. Update the React state (changes the active icon color)
-            setActiveId(newId);
 
-            // 2. Silently update the URL hash in the browser
-            // We check `typeof window` to ensure Next.js doesn't crash during server-side rendering
+            setActiveId(newId);
             if (typeof window !== "undefined") {
               window.history.replaceState(null, "", `#${newId}`);
             }

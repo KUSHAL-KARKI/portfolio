@@ -1,185 +1,351 @@
 "use client";
 
 import Image from "next/image";
-import image from "@/public/images/profile/profile.jpeg";
+import profile1 from "@/public/images/profile/profile1.jpeg";
+import profile2 from "@/public/images/profile/profile2.jpg";
+import contactpic from "@/public/images/profile/contact2.jpg";
+import projectpic from "@/public/images/profile/project2.jpg";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import {
+  staggerContainer,
+  staggerChild,
+  fromBottom,
+} from "@/animations/variants";
+import { useFullPageScroll } from "@/hooks/useFullpageScroll";
+const inView = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: false, amount: 0.2 },
+};
+
+function Divider() {
+  return (
+    <motion.div
+      variants={staggerChild}
+      className="mt-3 mb-6 flex flex-col gap-2"
+    >
+      <motion.div
+        variants={staggerChild}
+        className="h-0.5 w-16 rounded-full bg-white"
+      />
+      <motion.div
+        variants={staggerChild}
+        className="h-0.5 w-16 rounded-full bg-white ml-10"
+      />
+    </motion.div>
+  );
+}
 
 export default function Home() {
   const router = useRouter();
+  const sectionIds = ["home", "about", "project", "contact"];
+  useFullPageScroll(sectionIds);
 
   return (
-    <main className="w-full flex flex-col items-center overflow-hidden">
-      {/* Hero Section */}
+    <main className="w-full flex flex-col items-center overflow-x-hidden">
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
         id="home"
-        className="w-full min-h-screen flex items-center justify-center px-6 md:px-16"
+        className="w-full min-h-screen  snap-start
+    snap-always flex items-center justify-center px-6 sm:px-10 lg:px-16 py-24 lg:py-0"
       >
-        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
-          {/* Left Content */}
-          <div className="flex-1 flex flex-col items-start">
-            <span className="text-sm font-semibold tracking-[0.4em] uppercase text-zinc-500">
+        <div className="w-full max-w-5xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-10 lg:gap-20">
+          <motion.div
+            variants={staggerContainer(0.12, 0.05)}
+            {...inView}
+            className="flex-1 flex flex-col items-start"
+          >
+            <motion.span
+              variants={staggerChild}
+              className="text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase text-zinc-500"
+            >
               Kushal Karki
-            </span>
+            </motion.span>
 
-            <h1 className="text-6xl mt-4 md:text-[4rem] font-bold leading-[1.1] tracking-tight">
+            <motion.h1
+              variants={staggerChild}
+              className="text-4xl sm:text-5xl lg:text-[4rem] font-bold leading-[1.1] tracking-tight mt-3"
+            >
               Full Stack Software Engineer
-            </h1>
+            </motion.h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-zinc-400">
-              Computer Engineering student passionate about building scalable
-              web applications using the MERN stack. I enjoy solving real-world
-              problems through clean architecture, efficient backend systems,
-              and modern user experiences.
-            </p>
+            <motion.p
+              variants={staggerChild}
+              className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-zinc-400"
+            >
+              Computer Engineering student and MERN Stack Developer focused on
+              building modern, responsive, and scalable web applications.
+            </motion.p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <button className="px-4 py-2 rounded-full bg-white font-semibold text-black transition-all hover:bg-zinc-400" >
+            <motion.div
+              variants={staggerChild}
+              className="mt-8 flex flex-wrap gap-3"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-5 py-2.5 rounded-full bg-white font-semibold text-sm text-black transition-colors hover:bg-zinc-200"
+              >
                 Download Resume
-              </button>
-              <button className="px-4 py-2 rounded-full border border-zinc-700 font-semibold transition-all hover:border-zinc-500 hover:bg-zinc-800/50" onClick={() => router.push('#contact')}>
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-5 py-2.5 rounded-full border border-zinc-700 font-semibold text-sm transition-colors hover:border-zinc-500 hover:bg-zinc-800/50"
+                onClick={() => router.push("#contact")}
+              >
                 Contact Me
-              </button>
-            </div>
-          </div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
 
-          {/* Right section: Image */}
-          <div className="flex-shrink-0 relative w-full max-w-[250px] md:max-w-[280px] aspect-[2/3] overflow-hidden rounded-full shadow-2xl">
-            <Image
-              src={image}
-              sizes="(max-width: 768px) 100vw, 280px"
-              alt="Kushal Karki"
-              fill
-              priority
-              className="object-cover brightness-75 grayscale transition-all duration-700 hover:brightness-100 hover:grayscale-0 hover:scale-110"
-            />
-          </div>
+          {/* Right section */}
+          <motion.div
+            variants={staggerContainer(0.12, 0.4)}
+            {...inView}
+            className="shrink-0"
+          >
+            <motion.div
+              variants={staggerChild}
+              className="relative w-32.5 h-32.5 sm:w-40 sm:h-40 lg:w-65 lg:h-95 overflow-hidden rounded-full shadow-2xl"
+            >
+              <Image
+                src={profile1}
+                sizes="(max-width: 640px) 130px, (max-width: 1024px) 160px, 260px"
+                alt="Kushal Karki"
+                fill
+                priority
+                className="object-cover brightness-75 grayscale transition-all duration-700 hover:brightness-100 hover:grayscale-0 hover:scale-110"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* About Section */}
+      {/* ── About ────────────────────────────────────────────────────────── */}
       <section
         id="about"
-        className="w-full min-h-screen flex items-center justify-center px-6 md:px-16"
+        className="w-full min-h-screen  snap-start
+    snap-always flex items-center justify-center py-24 lg:py-0"
       >
-        {/* Left Content */}
-        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
-          <div className="flex-1">
-            <h1 className="text-4xl md:text-5xl font-bold">About Me</h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-zinc-400">
-              I am a Computer Engineering student and MERN Stack Developer with
-              a strong interest in backend development, system design, and
-              scalable applications. My focus is on building efficient APIs,
-              real-time applications, distributed systems, and modern web
-              applications using React, Next.js, Node.js, Express, and MongoDB.
-            </p>
-            <button className="mt-8 px-4 py-2 rounded-full border border-zinc-700 font-semibold hover:bg-zinc-800/50 transition-all" onClick={() => router.push('/about')}>
-              Learn More
-            </button>
-          </div>
+        <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-0 lg:gap-20">
+          {/* Image — full bleed on mobile/tablet, right column on desktop */}
+          <motion.div
+            variants={staggerContainer(0.12, 0.3)}
+            {...inView}
+            className="w-full lg:w-105 lg:shrink-0 relative aspect-video lg:aspect-square overflow-hidden mb-8 lg:mb-0 lg:order-2"
+          >
+            <motion.div
+              variants={staggerChild}
+              className="w-full h-full relative"
+            >
+              <Image
+                src={profile2}
+                sizes="(max-width: 1024px) 100vw, 420px"
+                alt="Kushal Karki"
+                fill
+                priority
+                className="object-cover lg:rounded-xl brightness-75 grayscale transition-all duration-500 hover:brightness-90 hover:grayscale-0"
+              />
+            </motion.div>
+          </motion.div>
 
-          {/* Right Content */}
+          {/* Text */}
+          <motion.div
+            variants={staggerContainer(0.12, 0.05)}
+            {...inView}
+            className="flex-1 flex flex-col items-start px-6 sm:px-10 lg:px-0 lg:order-1"
+          >
+            <motion.div variants={staggerChild}>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                About Me
+              </h2>
+              <Divider />
+            </motion.div>
 
-          <div className="flex-shrink-0 relative w-full max-w-[320px] md:max-w-[400px] aspect-square overflow-hidden ">
-            <Image
-              src={image}
-              sizes="(max-width: 768px) 100vw, 400px"
-              alt="Kushal Karki"
-              fill
-              priority
-              className="object-cover brightness-75 grayscale transition-all duration-500 hover:brightness-100 hover:grayscale-0"
-            />
-          </div>
+            <motion.p
+              variants={staggerChild}
+              className="text-base sm:text-lg leading-relaxed text-zinc-400"
+            >
+              I am a Computer Engineering student and MERN Stack Developer
+              passionate about building modern web applications. I enjoy
+              learning new technologies, solving problems, and creating clean,
+              user-friendly websites and applications.
+            </motion.p>
+
+            <motion.div variants={staggerChild}>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="mt-7 px-5 py-2.5 rounded-full border border-zinc-700 text-sm font-semibold hover:bg-zinc-800/50 transition-colors"
+                onClick={() => router.push("/about")}
+              >
+                Learn More
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* ── Projects ─────────────────────────────────────────────────────── */}
       <section
         id="project"
-        className="w-full min-h-screen flex items-center justify-center px-6 md:px-16"
+        className="w-full min-h-screen  snap-start
+    snap-always flex items-center justify-center py-24 lg:py-0"
       >
-        {/* Left Content */}
-        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
-          <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold">Projects</h2>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-zinc-400">
+        <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-0 lg:gap-20">
+          {/* Image */}
+          <motion.div
+            variants={staggerContainer(0.12, 0.3)}
+            {...inView}
+            className="w-full lg:shrink-0 relative aspect-video lg:aspect-square lg:w-105 overflow-hidden mb-8 lg:mb-0 lg:order-2"
+          >
+            <motion.div
+              variants={staggerChild}
+              className="w-full h-full relative"
+            >
+              <Image
+                src={projectpic}
+                sizes="(max-width: 1024px) 100vw, 420px"
+                alt="Projects"
+                fill
+                priority
+                className="object-cover lg:rounded-xl brightness-75 grayscale transition-all duration-500 hover:brightness-100 hover:grayscale-0"
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Text */}
+          <motion.div
+            variants={staggerContainer(0.12, 0.05)}
+            {...inView}
+            className="flex-1 flex flex-col items-start px-6 sm:px-10 lg:px-0 lg:order-1"
+          >
+            <motion.div variants={staggerChild}>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                Projects
+              </h2>
+              <Divider />
+            </motion.div>
+
+            <motion.p
+              variants={staggerChild}
+              className="text-base sm:text-lg leading-relaxed text-zinc-400"
+            >
               Here are some of my recent projects that showcase my skills in
               full-stack development.
-            </p>
-            <button className="mt-8 px-4 py-2 rounded-full border border-zinc-700 font-semibold hover:bg-zinc-700/40 transition-all">
-              View All Projects
-            </button>
-          </div>
+            </motion.p>
 
-          {/* Right Content */}
-          <div className="flex-shrink-0 relative w-full max-w-[320px] md:max-w-[400px] aspect-square overflow-hidden ">
-            <Image
-              src={image}
-              sizes="(max-width: 768px) 100vw, 400px"
-              alt="Kushal Karki"
-              fill
-              priority
-              className="object-cover brightness-75 grayscale transition-all duration-500 hover:brightness-100 hover:grayscale-0"
-            />
-          </div>
+            <motion.div variants={staggerChild}>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="mt-7 px-5 py-2.5 rounded-full border border-zinc-700 text-sm font-semibold hover:bg-zinc-700/40 transition-colors"
+                onClick={() => router.push("/project")}
+              >
+                View All Projects
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* ── Contact ───────────────────────────────────────────────────────── */}
       <section
         id="contact"
-        className="w-full min-h-screen flex items-center justify-center px-6 md:px-16"
+        className="w-full min-h-screen  snap-start
+    snap-always flex items-center justify-center py-24 lg:py-0"
       >
-        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
-          {/* Left Content */}
-          <div className="flex-1 flex flex-col items-start">
-            <h1 className="text-4xl md:text-5xl font-bold">Get In Touch</h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-zinc-400">
+        <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-0 lg:gap-20">
+          {/* Image */}
+          <motion.div
+            variants={staggerContainer(0.12, 0.3)}
+            {...inView}
+            className="w-full lg:shrink-0 relative aspect-video lg:aspect-square lg:w-105 overflow-hidden mb-8 lg:mb-0 lg:order-2"
+          >
+            <motion.div
+              variants={staggerChild}
+              className="w-full h-full relative"
+            >
+              <Image
+                src={contactpic}
+                sizes="(max-width: 1024px) 100vw, 420px"
+                alt="Contact"
+                fill
+                priority
+                className="object-cover lg:rounded-xl brightness-75 grayscale transition-all duration-500 hover:brightness-55 hover:grayscale-0"
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Text */}
+          <motion.div
+            variants={staggerContainer(0.12, 0.05)}
+            {...inView}
+            className="flex-1 flex flex-col items-start px-6 sm:px-10 lg:px-0 lg:order-1"
+          >
+            <motion.div variants={staggerChild}>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                Get In Touch
+              </h2>
+              <Divider />
+            </motion.div>
+
+            <motion.p
+              variants={staggerChild}
+              className="text-base sm:text-lg leading-relaxed text-zinc-400"
+            >
               Interested in working together or discussing a project? Feel free
               to reach out.
-            </p>
-            <a
+            </motion.p>
+
+            <motion.a
+              variants={staggerChild}
               href="mailto:kushalkarki@gmail.com"
-              className="mt-4 text-lg md:text-lg font-medium hover:text-zinc-300 transition-colors"
+              className="mt-4 text-base sm:text-lg font-medium hover:text-zinc-300 transition-colors break-all"
             >
               kushalkarki@gmail.com
-            </a>
+            </motion.a>
 
-            <div className="mt-8 flex justify-start gap-6">
-              <a
-                href="mailto:kushalkarki@gmail.com"
-                className="flex items-center justify-center w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 hover:-translate-y-1 transition-all duration-300"
-              >
-                <FaEnvelope className="text-2xl" />
-              </a>
-              <a
-                href="https://github.com/KUSHAL-KARKI"
-                target="_blank"
-                className="flex items-center justify-center w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 hover:-translate-y-1 transition-all duration-300"
-              >
-                <FaGithub className="text-2xl" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/kushal-karki-2978342a3"
-                target="_blank"
-                className="flex items-center justify-center w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 hover:-translate-y-1 transition-all duration-300"
-              >
-                <FaLinkedin className="text-2xl" />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Content */}
-          <div className="flex-shrink-0 relative w-full max-w-[320px] md:max-w-[400px] aspect-square overflow-hidden ">
-            <Image
-              src={image}
-              sizes="(max-width: 768px) 100vw, 400px"
-              alt="Kushal Karki"
-              fill
-              priority
-              className="object-cover brightness-75 grayscale transition-all duration-500 hover:brightness-100 hover:grayscale-0"
-            />
-          </div>
+            <motion.div
+              variants={staggerChild}
+              className="mt-8 flex justify-start gap-4"
+            >
+              {[
+                {
+                  href: "mailto:kushalkarki@gmail.com",
+                  Icon: FaEnvelope,
+                  label: "Email",
+                },
+                {
+                  href: "https://github.com/KUSHAL-KARKI",
+                  Icon: FaGithub,
+                  label: "GitHub",
+                  target: "_blank",
+                },
+                {
+                  href: "https://www.linkedin.com/in/kushal-karki-2978342a3",
+                  Icon: FaLinkedin,
+                  label: "LinkedIn",
+                  target: "_blank",
+                },
+              ].map(({ href, Icon, label, target }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target={target}
+                  aria-label={label}
+                  variants={fromBottom()}
+                  whileHover={{ y: -6 }}
+                  className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-600 transition-colors duration-300"
+                >
+                  <Icon className="text-xl sm:text-2xl" />
+                </motion.a>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </main>

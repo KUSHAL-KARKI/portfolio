@@ -1,203 +1,196 @@
-// app/about/page.tsx
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { staggerContainer, staggerChild, pageFade } from "@/animations/variants";
 import Link from "next/link";
-import image from "@/public/images/profile/profile.jpeg";
+import { skillCategories, timeline } from "@/data/skills";
+import PhotoCollage from "@/components/ui/photoCollage";
 
-// 1. Import official brand icons (Simple Icons) and a few generic ones (FontAwesome)
-import { 
-  SiReact, SiNextdotjs, SiJavascript, SiTypescript, SiTailwindcss, SiHtml5, SiCss, SiFramer,
-  SiNodedotjs, SiExpress, SiCplusplus, SiPython,
-  SiMongodb, SiPostgresql, SiPrisma, SiRedis,
-  SiGit, SiGithub, SiDocker, SiPostman, SiVercel, SiLinux
-} from "react-icons/si";
-import { FaNetworkWired, FaServer, FaDatabase } from "react-icons/fa";
-
-// 2. Updated Data Structure with Icons
-const skillCategories = [
-  {
-    title: "Frontend Development",
-    skills: [
-      { name: "React", Icon: SiReact },
-      { name: "Next.js", Icon: SiNextdotjs },
-      { name: "JavaScript", Icon: SiJavascript },
-      { name: "TypeScript", Icon: SiTypescript },
-      { name: "Tailwind CSS", Icon: SiTailwindcss },
-      { name: "HTML5", Icon: SiHtml5 },
-      { name: "CSS3", Icon: SiCss },
-      { name: "Framer Motion", Icon: SiFramer },
-    ],
-  },
-  {
-    title: "Backend & APIs",
-    skills: [
-      { name: "Node.js", Icon: SiNodedotjs },
-      { name: "Express.js", Icon: SiExpress },
-      { name: "RESTful APIs", Icon: FaServer },
-      { name: "System Design", Icon: FaNetworkWired },
-      { name: "C++", Icon: SiCplusplus },
-      { name: "Python", Icon: SiPython },
-    ],
-  },
-  {
-    title: "Database & ORM",
-    skills: [
-      { name: "MongoDB", Icon: SiMongodb },
-      { name: "Mongoose", Icon: FaDatabase }, // Using generic DB icon for Mongoose
-      { name: "PostgreSQL", Icon: SiPostgresql },
-      { name: "Prisma", Icon: SiPrisma },
-      { name: "Redis", Icon: SiRedis },
-    ],
-  },
-  {
-    title: "Infrastructure & Tools",
-    skills: [
-      { name: "Git", Icon: SiGit },
-      { name: "GitHub", Icon: SiGithub },
-      { name: "Docker", Icon: SiDocker },
-      { name: "Postman", Icon: SiPostman },
-      { name: "Vercel", Icon: SiVercel },
-      { name: "Linux / Bash", Icon: SiLinux },
-    ],
-  },
-];
+const inView = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: false, amount: 0.2 },
+};
 
 export default function AboutPage() {
   return (
-    <main className="w-full min-h-screen flex flex-col items-center px-6 md:px-16 py-24">
+    <motion.main
+      variants={pageFade}
+      initial="hidden"
+      animate="visible"
+      className="w-full min-h-screen flex flex-col items-center px-5 sm:px-8 md:px-16 py-16 sm:py-20 md:py-24"
+    >
       <div className="w-full max-w-5xl mx-auto">
-        
+
         {/* Back Button */}
-        <Link 
-          href="/" 
-          className="inline-flex items-center gap-2 text-sm font-semibold tracking-wider uppercase text-zinc-500 hover:text-white transition-colors mb-16"
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-sm font-semibold tracking-wider uppercase text-zinc-500 hover:text-white transition-colors mb-10 sm:mb-16"
         >
           <span>←</span> Back
         </Link>
 
-        <div className="flex flex-col gap-20 md:gap-32">
-          {/* Top Half: Narrative & Image */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
-            {/* Left Content */}
-            <div className="flex-1 flex flex-col items-start">
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
-                My Story
-              </h1>
-              
-              <div className="mt-8 space-y-6 max-w-xl text-lg leading-relaxed text-zinc-400">
-                <p>
-                  I am a Computer Engineering student passionate about solving real-world problems through clean architecture and modern user experiences.
-                </p>
-                <p>
-                  My journey into software development started with a curiosity for how systems operate behind the scenes. Today, my focus is strictly on the MERN stack, architecting scalable backend APIs, and building fluid, responsive interfaces.
-                </p>
-                <p>
-                  I believe that great software isn't just about writing code that works—it's about writing code that is clean, maintainable, and highly performant.
-                </p>
-              </div>
+        <div className="flex flex-col gap-16 sm:gap-24 md:gap-32">
 
-              <button className="mt-10 px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:scale-105 transition-all">
-                Download Full Resume
-              </button>
+          {/* ── Hero: Narrative & Collage ──────────────────────────────── */}
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+
+            {/* Collage — on mobile/tablet sits above text */}
+            <div className="flex justify-center w-full lg:hidden">
+              <PhotoCollage inView={inView} />
             </div>
 
-            {/* Right Content: Image */}
-            <div className="flex-shrink-0 relative w-full max-w-[300px] md:max-w-[360px] aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl">
-              <Image
-                src={image}
-                sizes="(max-width: 768px) 100vw, 360px"
-                alt="Kushal Karki"
-                fill
-                priority
-                className="object-cover brightness-75 grayscale transition-all duration-700 hover:brightness-100 hover:grayscale-0"
-              />
+            {/* Left — text */}
+            <motion.div
+              variants={staggerContainer(0.12, 0.05)}
+              {...inView}
+              className="flex-1 flex flex-col items-start"
+            >
+              <motion.h1
+                variants={staggerChild}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight"
+              >
+                My Story
+              </motion.h1>
+
+              <motion.div
+                variants={staggerChild}
+                className="mt-6 sm:mt-8 space-y-4 sm:space-y-6 text-base sm:text-lg leading-relaxed text-zinc-400"
+              >
+                <p>
+                  I am a Computer Engineering student at{" "}
+                  <strong className="text-zinc-200">Pashchimanchal Campus, Pokhara</strong>,
+                  with a passion for full-stack web development and modern
+                  software engineering. I enjoy building practical,
+                  user-friendly applications that solve real-world problems
+                  while continuously learning new technologies and improving my
+                  skills.
+                </p>
+                <p>
+                  My primary focus is the MERN stack, and I enjoy developing
+                  modern web applications using React, Next.js, Node.js,
+                  Express, and MongoDB. Through personal projects, I have gained
+                  hands-on experience in authentication, REST APIs, real-time
+                  applications, database design, and responsive user interfaces.
+                </p>
+                <p className="hidden sm:block">
+                  I believe great software is built with clean, maintainable
+                  code and thoughtful design. Every project is an opportunity to
+                  learn, improve, and create applications that are reliable,
+                  scalable, and enjoyable to use. My goal is to grow as a
+                  software engineer while building solutions that make a
+                  meaningful impact.
+                </p>
+              </motion.div>
+
+              <motion.div variants={staggerChild}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="mt-8 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-white text-black text-sm sm:text-base font-semibold transition-colors hover:bg-zinc-200"
+                >
+                  Download Full Resume
+                </motion.button>
+              </motion.div>
+            </motion.div>
+
+            {/* Collage — desktop only, right side */}
+            <div className="hidden lg:flex shrink-0">
+              <PhotoCollage inView={inView} />
             </div>
           </div>
 
-          {/* Bottom Half: Skills & Education */}
-          <div className="flex flex-col gap-24 pt-16 border-t border-zinc-800/50">
-            
-            {/* DETAILED TECH STACK SECTION */}
+          {/* ── Skills & Education ─────────────────────────────────────── */}
+          <div className="flex flex-col gap-16 sm:gap-20 md:gap-24 pt-12 sm:pt-16 border-t border-zinc-800/50">
+
+            {/* Technical Arsenal */}
             <div className="w-full">
-              <h3 className="text-3xl font-bold mb-12 text-white">Technical Arsenal</h3>
-              
-              {/* Grid layout matching your reference image */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              <motion.div variants={staggerContainer(0.12, 0.05)} {...inView}>
+                <motion.h3
+                  variants={staggerChild}
+                  className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-white"
+                >
+                  Technical Arsenal
+                </motion.h3>
+              </motion.div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-10 sm:gap-y-16">
                 {skillCategories.map((category) => (
-                  <div key={category.title} className="flex flex-col items-start">
-                    
-                    {/* Category Title */}
-                    <h4 className="text-sm font-semibold tracking-[0.15em] uppercase text-zinc-500 mb-6">
+                  <motion.div
+                    key={category.title}
+                    variants={staggerContainer(0.07, 0.05)}
+                    {...inView}
+                    className="flex flex-col items-start"
+                  >
+                    <motion.h4
+                      variants={staggerChild}
+                      className="text-xs sm:text-sm font-semibold tracking-[0.15em] uppercase text-zinc-500 mb-4 sm:mb-6"
+                    >
                       {category.title}
-                    </h4>
-                    
-                    {/* ICON PILLS CONTAINER */}
-                    <div className="flex flex-wrap gap-3">
+                    </motion.h4>
+
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       {category.skills.map(({ name, Icon }) => (
-                        <span 
-                          key={name} 
-                          // Updated pill styling: added flex, items-center, gap-2 for the icon
-                          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border border-zinc-800 bg-zinc-900/50 text-zinc-400 transition-all hover:border-zinc-500 hover:text-white hover:bg-zinc-800 cursor-default"
+                        <motion.span
+                          key={name}
+                          variants={staggerChild}
+                          className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium border border-zinc-800 bg-zinc-900/50 text-zinc-400 transition-colors hover:border-zinc-500 hover:text-white hover:bg-zinc-800 cursor-default"
                         >
-                          <Icon className="text-lg opacity-80" />
+                          <Icon className="text-base sm:text-lg opacity-80" />
                           {name}
-                        </span>
+                        </motion.span>
                       ))}
                     </div>
-
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* Education Timeline Row */}
-            <div className="w-full">
-              <h3 className="text-3xl font-bold mb-12 text-white">Education</h3>
-              <div className="flex flex-col gap-10">
-                
-                {/* Timeline Item 1: Bachelor's */}
-                <div className="relative pl-8 border-l border-zinc-800">
-                  <div className="absolute w-3 h-3 bg-white rounded-full -left-[6.5px] top-1.5 ring-4 ring-[#18181B]"></div>
-                  <h4 className="text-xl font-semibold text-zinc-200">B.E. Computer Engineering</h4>
-                  <p className="text-zinc-400 mt-2 leading-relaxed max-w-3xl">
-                    <span className="text-zinc-300 font-medium block mb-1">Tribhuvan University, IOE, Western Regional Campus (Pokhara)</span>
-                    Currently pursuing my degree, focusing on core computer science fundamentals, data structures, algorithms, and software architecture.
-                  </p>
-                  <span className="text-sm font-medium text-zinc-500 mt-3 block tracking-wider uppercase">
-                    2021 — Present
-                  </span>
-                </div>
+            {/* Education Timeline */}
+            <div className="w-full pb-8">
+              <motion.div variants={staggerContainer(0.12, 0.05)} {...inView}>
+                <motion.h3
+                  variants={staggerChild}
+                  className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-white"
+                >
+                  Education
+                </motion.h3>
+              </motion.div>
 
-                {/* Timeline Item 2: +2 Level */}
-                <div className="relative pl-8 border-l border-zinc-800">
-                  <div className="absolute w-3 h-3 bg-zinc-600 rounded-full -left-[6.5px] top-1.5 ring-4 ring-[#18181B]"></div>
-                  <h4 className="text-lg font-semibold text-zinc-300">High School (+2 Science)</h4>
-                  <p className="text-zinc-500 mt-2 leading-relaxed max-w-3xl">
-                    <span className="text-zinc-400 font-medium block mb-1">Oxford Secondary School, Rupandehi</span>
-                    Built a strong foundation in physics, mathematics, and analytical problem-solving.
-                  </p>
-                  <span className="text-sm font-medium text-zinc-600 mt-3 block tracking-wider uppercase">
-                    Graduated 2021
-                  </span>
-                </div>
-
-                {/* Timeline Item 3: Class 10 */}
-                <div className="relative pl-8 border-l border-zinc-800">
-                  <div className="absolute w-3 h-3 bg-zinc-800 rounded-full -left-[6.5px] top-1.5 ring-4 ring-[#18181B]"></div>
-                  <h4 className="text-lg font-semibold text-zinc-400">Class 10 (SEE)</h4>
-                  <p className="text-zinc-500 mt-2 leading-relaxed max-w-3xl">
-                    <span className="text-zinc-500 font-medium block mb-1">Bhu Pu Sainik School, Banganga-8, Kapilvastu</span>
-                  </p>
-                  <span className="text-sm font-medium text-zinc-600 mt-3 block tracking-wider uppercase">
-                    Graduated 2019
-                  </span>
-                </div>
-
-              </div>
+              <motion.div
+                variants={staggerContainer(0.15, 0.1)}
+                {...inView}
+                className="flex flex-col gap-8 sm:gap-10"
+              >
+                {timeline.map(({ degree, school, desc, year, dotColor }) => (
+                  <motion.div
+                    key={degree}
+                    variants={staggerChild}
+                    className="relative pl-6 sm:pl-8 border-l border-zinc-800"
+                  >
+                    <div
+                      className={`absolute w-2.5 h-2.5 sm:w-3 sm:h-3 ${dotColor} rounded-full left-[-5.5px] sm:left-[-6.5px] top-1.5 ring-4 ring-[#18181B]`}
+                    />
+                    <h4 className="text-base sm:text-xl font-semibold text-zinc-200">
+                      {degree}
+                    </h4>
+                    <p className="text-zinc-400 mt-1.5 sm:mt-2 leading-relaxed text-sm sm:text-base">
+                      <span className="text-zinc-300 font-medium block mb-1">
+                        {school}
+                      </span>
+                      {desc}
+                    </p>
+                    <span className="text-xs sm:text-sm font-medium text-zinc-500 mt-2 sm:mt-3 block tracking-wider uppercase">
+                      {year}
+                    </span>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }

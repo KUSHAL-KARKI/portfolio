@@ -15,11 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased scroll-smooth">
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-screen bg-zinc-950 text-white overflow-x-hidden">
         <Navbar />
         <Sidebar />
-
         <div className="w-full md:pl-20">{children}</div>
       </body>
     </html>
