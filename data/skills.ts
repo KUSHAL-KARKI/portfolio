@@ -37,6 +37,7 @@ export const skillCategories = [
     skills: [
       { name: "MongoDB", Icon: SiMongodb },
       { name: "Mongoose", Icon: FaDatabase },
+      { name: "MySQL", Icon: FaDatabase },
       { name: "PostgreSQL", Icon: SiPostgresql },
       { name: "Prisma", Icon: SiPrisma },
       { name: "Redis", Icon: SiRedis },
@@ -71,10 +72,17 @@ export const timeline = [
     dotColor: "bg-zinc-600",
   },
   {
-    degree: "Class 10 (SEE)",
+    degree: "Secondary Education(SEE)",
     school: "Bhu Pu Sainik School, Banganga-8, Kapilvastu",
     desc: "",
     year: "Graduated 2020",
+    dotColor: "bg-zinc-800",
+  },
+  {
+    degree: "Primary Education",
+    school: "Bhu Pu Sainik School, Banganga-8, Kapilvastu",
+    desc: "",
+    year: "Graduated 2018",
     dotColor: "bg-zinc-800",
   },
 ];

@@ -1,29 +1,34 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaHome, FaUser, FaEnvelope, FaFolderOpen } from "react-icons/fa";
-import { useScroll } from "@/hooks/useScroll";
+import { useFullPageScroll } from "@/hooks/useFullpageScroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { sidebarVariants, itemVariants } from "@/animations/variants";
 
 const navItems = [
-  { label: "Home",    href: "/#home",    Icon: FaHome },
-  { label: "About",   href: "/#about",   Icon: FaUser },
-  { label: "Project", href: "/#project", Icon: FaFolderOpen },
-  { label: "Contact", href: "/#contact", Icon: FaEnvelope },
+  { label: "Home",    sectionId: "home",    Icon: FaHome },
+  { label: "About",   sectionId: "about",   Icon: FaUser },
+  { label: "Project", sectionId: "project", Icon: FaFolderOpen },
+  { label: "Contact", sectionId: "contact", Icon: FaEnvelope },
 ];
 
-const sectionIds = navItems.map((item) => item.href.replace("/#", ""));
-
-
+const sectionIds = navItems.map((i) => i.sectionId);
 
 const Sidebar = () => {
   const pathname = usePathname();
-  const { activeId, setActiveId } = useScroll(sectionIds);
+
+  // Single source of truth — activeId and scrollToIndex from the same hook
+  const { activeId, setActiveId, scrollToIndex } = useFullPageScroll(sectionIds);
 
   const hiddenRoutes = ["/about", "/project"];
   if (hiddenRoutes.some((r) => pathname.startsWith(r))) return null;
+
+  const handleClick = (sectionId: string) => {
+    const index = sectionIds.indexOf(sectionId);
+    setActiveId(sectionId);   // instant highlight
+    scrollToIndex(index);     // smooth scroll
+  };
 
   return (
     <motion.aside
@@ -32,10 +37,9 @@ const Sidebar = () => {
       animate="visible"
       className="hidden md:flex fixed left-0 top-1/4 z-50"
     >
-      <div className="flex flex-col justify-evenly items-center gap-6 h-[50vh] w-14 px-2 py-4 rounded-e-3xl bg-zinc-900/80 border border-white/[0.05] border-t-white/[0.08] border-r-white/[0.03] backdrop-blur-xl shadow-[0_4px_32px_-8px_rgba(0,0,0,0.6)]">
-        {navItems.map(({ label, href, Icon }, i) => {
-          const key = href.replace("/#", "");
-          const isActive = activeId === key;
+      <div className="flex flex-col justify-evenly items-center gap-6 h-[50vh] w-14 px-2 py-4 rounded-e-3xl bg-zinc-900/80 border border-white/5 border-t-white/8 border-r-white/3 backdrop-blur-xl shadow-[0_4px_32px_-8px_rgba(0,0,0,0.6)]">
+        {navItems.map(({ label, sectionId, Icon }, i) => {
+          const isActive = activeId === sectionId;
 
           return (
             <motion.div
@@ -46,12 +50,11 @@ const Sidebar = () => {
               animate="visible"
               className="relative group"
             >
-              <Link
-                href={href}
-                onClick={() => setActiveId(key)}
-                className="relative flex items-center justify-center w-10 h-10 rounded-xl transition-colors duration-300"
+              <button
+                onClick={() => handleClick(sectionId)}
+                aria-label={label}
+                className="relative flex items-center justify-center w-10 h-10 rounded-xl"
               >
-                {/* Active background pill — animates between items */}
                 <AnimatePresence>
                   {isActive && (
                     <motion.span
@@ -65,7 +68,6 @@ const Sidebar = () => {
                   )}
                 </AnimatePresence>
 
-                {/* Icon */}
                 <motion.span
                   animate={{
                     scale: isActive ? 1.15 : 1,
@@ -77,9 +79,8 @@ const Sidebar = () => {
                 >
                   <Icon className="text-xl" />
                 </motion.span>
-              </Link>
+              </button>
 
-              {/* Tooltip — slides in from left */}
               <motion.span
                 initial={{ opacity: 0, x: -8 }}
                 whileHover={{ opacity: 1, x: 0 }}

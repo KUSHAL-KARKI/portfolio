@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 import { staggerContainer, staggerChild, pageFade } from "@/animations/variants";
-import Link from "next/link";
 import { skillCategories, timeline } from "@/data/skills";
 import PhotoCollage from "@/components/ui/photoCollage";
+import { useRouter } from "next/navigation";
 
 const inView = {
   initial: "hidden",
@@ -13,6 +13,7 @@ const inView = {
 };
 
 export default function AboutPage() {
+  const router = useRouter();
   return (
     <motion.main
       variants={pageFade}
@@ -23,12 +24,12 @@ export default function AboutPage() {
       <div className="w-full max-w-5xl mx-auto">
 
         {/* Back Button */}
-        <Link
-          href="/"
+        <button
           className="inline-flex items-center gap-2 text-sm font-semibold tracking-wider uppercase text-zinc-500 hover:text-white transition-colors mb-10 sm:mb-16"
+          onClick={() => router.push("/#about")}
         >
           <span>←</span> Back
-        </Link>
+        </button>
 
         <div className="flex flex-col gap-16 sm:gap-24 md:gap-32">
 
