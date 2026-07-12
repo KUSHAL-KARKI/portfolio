@@ -75,13 +75,16 @@ The application focuses on creating a centralized environment where users can sh
       "A Kanban-style team task manager with drag-and-drop boards, deadline tracking, and email notifications for overdue tasks.",
 
     // Hero
-    image: "/images/projects/taskflow-hero.jpg",
+    image: "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
 
     // Gallery
     gallery: [
-      "/images/projects/taskflow-1.jpg",
-      "/images/projects/taskflow-2.jpg",
-      "/images/projects/taskflow-3.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
     ],
 
     // Overview
@@ -131,14 +134,16 @@ The app includes role-based permissions for workspace owners and members, activi
       "A food pre-ordering system for campus canteens that lets students skip the lunch queue by ordering and paying ahead from their phones.",
 
     // Hero
-    image: "/images/projects/campuseats-hero.jpg",
+    image: "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
 
     // Gallery
     gallery: [
-      "/images/projects/campuseats-1.jpg",
-      "/images/projects/campuseats-2.jpg",
-      "/images/projects/campuseats-3.jpg",
-      "/images/projects/campuseats-4.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
     ],
 
     // Overview
@@ -188,13 +193,16 @@ The system tracks order status in real time, sends pickup-ready notifications, a
       "A developer-focused social platform for sharing code snippets, asking questions, and following other developers' project updates.",
 
     // Hero
-    image: "/images/projects/devconnect-hero.jpg",
+    image: "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
 
     // Gallery
     gallery: [
-      "/images/projects/devconnect-1.jpg",
-      "/images/projects/devconnect-2.jpg",
-      "/images/projects/devconnect-3.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
     ],
 
     // Overview

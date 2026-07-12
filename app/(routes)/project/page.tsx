@@ -155,7 +155,7 @@ export default function ProjectsPage() {
         {/* ── Other Projects ── */}
         {rest.length > 0 && (
           <>
-            <div className="h-px w-full bg-zinc-800 mb-10 sm:mb-12" />
+            <div className="w-full bg-zinc-800 mb-10 sm:mb-12" />
 
                  <motion.div
               variants={staggerContainer(0.12, 0.05)}
