@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kushal Karki Portfolio
+
+A personal portfolio built with Next.js, React, TypeScript, Framer Motion, and Tailwind CSS. It presents a full-screen landing page with animated sections for introduction, about, projects, and contact, plus dedicated routes for the about page and detailed project pages.
+
+## Features
+
+- Smooth full-page scrolling with animated section reveals
+- Portfolio home page with hero, about, projects, and contact sections
+- Dedicated about page with skills and education timeline
+- Project listing and per-project detail pages
+- Responsive UI optimized for desktop and mobile
+- Social links, resume access, and project metadata
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- React Icons
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - start the development server
+- `npm run build` - create a production build
+- `npm run start` - start the production server
+- `npm run lint` - run ESLint
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `app/` - application routes, layout, and global styles
+- `app/(routes)/about/` - about page
+- `app/(routes)/project/` - projects list and project detail routes
+- `components/` - shared layout and UI components
+- `data/` - portfolio content for projects, skills, and social links
+- `animations/` - Framer Motion variants and animation helpers
+- `hooks/` - custom hooks such as full-page scroll behavior
+- `public/images/` - profile and project images
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The portfolio content is data-driven from the files in `data/`.
+- The home page and subpages use animated transitions and scroll-aware navigation.

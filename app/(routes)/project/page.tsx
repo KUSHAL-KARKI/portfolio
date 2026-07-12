@@ -148,14 +148,13 @@ export default function ProjectsPage() {
           </>
         )}
 
-              {/* ── Divider ── */}
+        {/* ── Divider ── */}
 
-<div className="my-20 h-px w-full bg-zinc-800" />
+        <div className="my-20 h-px w-full bg-zinc-800" />
 
         {/* ── Other Projects ── */}
         {rest.length > 0 && (
           <>
-
             <motion.p
               variants={staggerChild}
               {...inView}

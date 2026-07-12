@@ -30,9 +30,7 @@ export default function FeaturedProjectCard({
 
   return (
     <Link href={`/project/${slug}`} className="block">
-      <motion.div
-        className="aspect-17/11 relative flex flex-col rounded-xl border border-zinc-800 bg-zinc-950 overflow-hidden hover:bg-zinc-900 hover:-translate-y-0.5 transition-all duration-300 group"
-      >
+      <motion.div className="aspect-17/11 relative flex flex-col rounded-xl border border-zinc-800 bg-zinc-950 overflow-hidden hover:bg-zinc-900 hover:-translate-y-0.5 transition-all duration-300 group">
         {/* ── Top section: screenshot (~65–70% of card height) ── */}
         <div className="relative w-full aspect-video overflow-hidden">
           <Image
@@ -57,7 +55,9 @@ export default function FeaturedProjectCard({
               <h3 className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight text-white mb-1.5 sm:mb-2">
                 {title}
               </h3>
-              <p className="text-sm sm:text-base text-zinc-500">{shortDescription.slice(0, 100)}...</p>
+              <p className="text-sm sm:text-base text-zinc-500">
+                {shortDescription.slice(0, 100)}...
+              </p>
             </div>
 
             {techStack.length > 0 && (
@@ -80,7 +80,7 @@ export default function FeaturedProjectCard({
           </div>
           <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-between gap-4 md:gap-0 shrink-0">
             <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-zinc-900 border border-zinc-800 rounded-full px-3 py-1.5 whitespace-nowrap">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500/70" />
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500/70" />
               {status}
             </span>
 
