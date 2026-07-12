@@ -1,92 +1,231 @@
-// data/projects.ts
 export const projects = [
   {
-    title: "E-Commerce API Architecture",
-    slug: "ecommerce-api",
-    year: "2023",
-    shortDescription: "A fully scalable backend for a modern e-commerce platform featuring JWT auth and payment integration.",
-    content: [
-      "For this project, the primary goal was to design a backend architecture capable of handling high-volume traffic during flash sales. I utilized Node.js and Express to build microservices.",
-      "One of the biggest challenges was ensuring database consistency during concurrent checkout requests. I implemented Redis for caching product states and locking transactions.",
-      "The final result was an API capable of serving 10,000 requests per minute with a 99.9% uptime."
-    ],
-    image: "/images/projects/82528385-a73f-488f-9003-513321283a6b.png",
-    techStack: ["Node.js", "Express", "MongoDB", "Redis"],
-    githubUrl: "https://github.com/yourusername/ecommerce-api",
-    liveUrl: "https://yourproject.com",
-  },
-  {
-    title: "Real-Time Chat Application",
-    slug: "real-time-chat",
-    year: "2024",
-    shortDescription: "A fluid, low-latency messaging app with real-time presence and typing indicators.",
-    content: [
-      "Building a real-time chat application required a deep dive into WebSockets. I chose Socket.io to handle the bidirectional communication between the client and server.",
-      "I designed the frontend with React and Tailwind CSS to feel as native and fluid as iMessage or WhatsApp."
-    ],
-    image: "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
-    techStack: ["React", "Socket.io", "Tailwind", "Express"],
-    githubUrl: "https://github.com/yourusername/real-time-chat",
-    liveUrl: "",
-  },
-  {
-    title: "Quanta AI Trading Agent",
-    slug: "quanta-ai-agent",
+    id: 1,
+
+    // Basic
+    title: "UniBridge",
+    slug: "unibridge",
     year: "2026",
-    shortDescription: "A self-hosted AI agent that monitors a personal portfolio and scans macro market trends.",
-    content: [
-      "Quanta was born out of a need to automate tedious stock market research. It leverages the Gemini API for natural language understanding and tool calling to execute background scans.",
-      "The frontend provides a sleek, terminal-inspired dashboard built with Shadcn UI, showing real-time logs of the agent's decision-making process.",
-      "Data is persisted locally using SQLite and Prisma, ensuring fast and private execution without relying on expensive cloud databases."
+    status: "Completed",
+
+    // Header
+    shortDescription:
+      "A university collaboration platform that connects students, teachers, and alumni through project collaboration, technical blogging, and real-time communication.",
+
+    // Hero
+    image: "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+
+    // Gallery
+    gallery: [
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
+      "/images/projects/64419ad21f1ce8214ab3c78f_Group 8-min.jpg",
     ],
-    image: "/images/projects/quanta-dashboard-hero.png",
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Gemini API", "Prisma"],
-    githubUrl: "https://github.com/yourusername/quanta",
-    liveUrl: "https://quanta-demo.com",
+
+    // Overview
+    overview: `
+UniBridge is a full-stack university collaboration platform developed as our Computer Engineering minor project . The platform enables students, teachers, and alumni to collaborate on academic projects, publish technical blogs, communicate through real-time chat, and build professional connections within the university ecosystem.
+
+The application focuses on creating a centralized environment where users can share knowledge, discover opportunities, and work together efficiently while maintaining secure role-based access.
+`,
+
+    // Tech Stack
+    techStack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "JWT",
+      "Socket.IO",
+      "Cloudinary",
+      "Git",
+    ],
+
+    // Metadata
+    role: "Full Stack Developer",
+
+    team: "4 Members",
+
+    duration: "3 Months",
+
+    // Links
+    githubUrl: "https://github.com/yourusername/unibridge",
+
+    liveUrl: "https://unibridge.vercel.app",
   },
+
   {
-    title: "Serverless Task Manager SaaS",
-    slug: "serverless-task-manager",
+    id: 2,
+
+    // Basic
+    title: "TaskFlow",
+    slug: "taskflow",
     year: "2025",
-    shortDescription: "A collaborative Kanban board built entirely on serverless architecture for infinite scalability.",
-    content: [
-      "This project explored the limits of serverless computing. I used Next.js API routes deployed on Vercel, paired with Supabase for the database and authentication.",
-      "To provide a seamless user experience, I implemented optimistic UI updates using React Query, ensuring tasks snap into place instantly before the server confirms the change.",
-      "Stripe was integrated to handle subscription tiers, allowing users to upgrade to premium workspaces."
+    status: "Completed",
+
+    // Header
+    shortDescription:
+      "A Kanban-style team task manager with drag-and-drop boards, deadline tracking, and email notifications for overdue tasks.",
+
+    // Hero
+    image: "/images/projects/taskflow-hero.jpg",
+
+    // Gallery
+    gallery: [
+      "/images/projects/taskflow-1.jpg",
+      "/images/projects/taskflow-2.jpg",
+      "/images/projects/taskflow-3.jpg",
     ],
-    image: "/images/projects/kanban-board-preview.jpg",
-    techStack: ["Next.js", "Supabase", "React Query", "Stripe"],
-    githubUrl: "https://github.com/yourusername/serverless-tasks",
-    liveUrl: "https://tasks-saas-demo.com",
-  },
-  {
-    title: "Crypto Portfolio Tracker",
-    slug: "crypto-portfolio-tracker",
-    year: "2022",
-    shortDescription: "A secure dashboard for aggregating crypto assets across multiple wallets and exchanges.",
-    content: [
-      "Managing assets across various blockchains can be messy. This app connects to popular exchange APIs (Binance, Coinbase) and parses on-chain wallet addresses to provide a unified view.",
-      "Security was a top priority, so all API keys are encrypted at rest using AES-256 and never exposed to the client.",
-      "The data visualization relies on Chart.js to render beautiful, responsive historical performance graphs."
+
+    // Overview
+    overview: `
+TaskFlow is a project management tool built to help small teams organize work across drag-and-drop Kanban boards. Users can create workspaces, invite teammates, assign tasks, set due dates, and track progress in real time.
+
+The app includes role-based permissions for workspace owners and members, activity logs for every board, and automated email reminders for tasks nearing their deadline.
+`,
+
+    // Tech Stack
+    techStack: [
+      "React",
+      "Redux Toolkit",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "JWT",
+      "Nodemailer",
+      "Tailwind CSS",
     ],
-    image: "/images/projects/crypto-tracker-dark.png",
-    techStack: ["Vue.js", "Node.js", "PostgreSQL", "Chart.js"],
-    githubUrl: "https://github.com/yourusername/crypto-tracker",
-    liveUrl: "",
+
+    // Metadata
+    role: "Backend Developer",
+
+    team: "Solo Project",
+
+    duration: "6 Weeks",
+
+    // Links
+    githubUrl: "https://github.com/yourusername/taskflow",
+
+    liveUrl: "https://taskflow-demo.vercel.app",
   },
+
   {
-    title: "Smart Home IoT Hub",
-    slug: "smart-home-iot-hub",
+    id: 3,
+
+    // Basic
+    title: "CampusEats",
+    slug: "campuseats",
+    year: "2025",
+    status: "Completed",
+
+    // Header
+    shortDescription:
+      "A food pre-ordering system for campus canteens that lets students skip the lunch queue by ordering and paying ahead from their phones.",
+
+    // Hero
+    image: "/images/projects/campuseats-hero.jpg",
+
+    // Gallery
+    gallery: [
+      "/images/projects/campuseats-1.jpg",
+      "/images/projects/campuseats-2.jpg",
+      "/images/projects/campuseats-3.jpg",
+      "/images/projects/campuseats-4.jpg",
+    ],
+
+    // Overview
+    overview: `
+CampusEats was built to solve the long lunch queues at our college canteen. Students can browse the daily menu, place an order with a chosen pickup time slot, and pay online, while canteen staff manage incoming orders from a dedicated admin dashboard.
+
+The system tracks order status in real time, sends pickup-ready notifications, and generates daily sales reports for the canteen management.
+`,
+
+    // Tech Stack
+    techStack: [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Stripe API",
+      "Socket.IO",
+      "Tailwind CSS",
+      "Vercel",
+      "Render",
+    ],
+
+    // Metadata
+    role: "Full Stack Developer",
+
+    team: "3 Members",
+
+    duration: "2 Months",
+
+    // Links
+    githubUrl: "https://github.com/yourusername/campuseats",
+
+    liveUrl: "https://campuseats.vercel.app",
+  },
+
+  {
+    id: 4,
+
+    // Basic
+    title: "DevConnect",
+    slug: "devconnect",
     year: "2024",
-    shortDescription: "A centralized control panel for managing smart lights, thermostats, and security cameras locally.",
-    content: [
-      "Tired of relying on cloud-dependent smart home apps, I built a local-first IoT hub using a Raspberry Pi as the main server.",
-      "The backend uses MQTT to communicate with various ESP32 microcontrollers around the house, providing sub-second response times for toggling devices.",
-      "The PWA frontend allows family members to install the dashboard directly to their home screens, bypassing the app stores."
+    status: "Completed",
+
+    // Header
+    shortDescription:
+      "A developer-focused social platform for sharing code snippets, asking questions, and following other developers' project updates.",
+
+    // Hero
+    image: "/images/projects/devconnect-hero.jpg",
+
+    // Gallery
+    gallery: [
+      "/images/projects/devconnect-1.jpg",
+      "/images/projects/devconnect-2.jpg",
+      "/images/projects/devconnect-3.jpg",
     ],
-    image: "/images/projects/iot-dashboard-mockup.webp",
-    techStack: ["React", "MQTT", "Python", "Docker"],
-    githubUrl: "https://github.com/yourusername/local-iot-hub",
-    liveUrl: "https://home-hub-local.net",
-  }
+
+    // Overview
+    overview: `
+DevConnect is a mini social network built for developers to share code snippets with syntax highlighting, post project updates, and ask technical questions. It supports likes, threaded comments, and a follow system similar to Twitter/X, tailored for a developer audience.
+
+This was my first project experimenting with real-time features and taught me a lot about structuring a scalable MERN backend with proper authentication and pagination.
+`,
+
+    // Tech Stack
+    techStack: [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "JWT",
+      "Prism.js",
+      "Tailwind CSS",
+    ],
+
+    // Metadata
+    role: "Full Stack Developer",
+
+    team: "Solo Project",
+
+    duration: "1 Month",
+
+    // Links
+    githubUrl: "https://github.com/yourusername/devconnect",
+
+    liveUrl: "https://devconnect-demo.vercel.app",
+  },
 ];

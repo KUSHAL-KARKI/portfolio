@@ -1,8 +1,8 @@
 import {
   SiReact, SiNextdotjs, SiJavascript, SiTypescript,
   SiTailwindcss, SiHtml5, SiCss, SiFramer,
-  SiNodedotjs, SiExpress, SiCplusplus, SiPython,
-  SiMongodb, SiPostgresql, SiPrisma, SiRedis,
+  SiNodedotjs, SiExpress, SiCplusplus,
+  SiMongodb, SiMysql ,SiPostgresql, SiPrisma, SiRedis,
   SiGit, SiGithub, SiDocker, SiPostman, SiVercel, SiLinux,
 } from "react-icons/si";
 import { FaNetworkWired, FaServer, FaDatabase } from "react-icons/fa";
@@ -29,7 +29,6 @@ export const skillCategories = [
       { name: "RESTful APIs", Icon: FaServer },
       { name: "System Design", Icon: FaNetworkWired },
       { name: "C++", Icon: SiCplusplus },
-      { name: "Python", Icon: SiPython },
     ],
   },
   {
@@ -37,7 +36,7 @@ export const skillCategories = [
     skills: [
       { name: "MongoDB", Icon: SiMongodb },
       { name: "Mongoose", Icon: FaDatabase },
-      { name: "MySQL", Icon: FaDatabase },
+      { name: "MySQL", Icon: SiMysql },
       { name: "PostgreSQL", Icon: SiPostgresql },
       { name: "Prisma", Icon: SiPrisma },
       { name: "Redis", Icon: SiRedis },

@@ -5,29 +5,31 @@ import { FaHome, FaUser, FaEnvelope, FaFolderOpen } from "react-icons/fa";
 import { useFullPageScroll } from "@/hooks/useFullpageScroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { sidebarVariants, itemVariants } from "@/animations/variants";
+import Link from "next/link";
 
 const navItems = [
-  { label: "Home",    sectionId: "home",    Icon: FaHome },
-  { label: "About",   sectionId: "about",   Icon: FaUser },
-  { label: "Project", sectionId: "project", Icon: FaFolderOpen },
-  { label: "Contact", sectionId: "contact", Icon: FaEnvelope },
+  { label: "Home", sectionId: "#home", Icon: FaHome },
+  { label: "About", sectionId: "#about", Icon: FaUser },
+  { label: "Project", sectionId: "#project", Icon: FaFolderOpen },
+  { label: "Contact", sectionId: "#contact", Icon: FaEnvelope },
 ];
 
-const sectionIds = navItems.map((i) => i.sectionId);
+const sectionIds = navItems.map((i) => i.sectionId.replace("#", ""));
 
 const Sidebar = () => {
   const pathname = usePathname();
 
   // Single source of truth — activeId and scrollToIndex from the same hook
-  const { activeId, setActiveId, scrollToIndex } = useFullPageScroll(sectionIds);
+  const { activeId, setActiveId, scrollToIndex } =
+    useFullPageScroll(sectionIds);
 
   const hiddenRoutes = ["/about", "/project"];
   if (hiddenRoutes.some((r) => pathname.startsWith(r))) return null;
 
   const handleClick = (sectionId: string) => {
     const index = sectionIds.indexOf(sectionId);
-    setActiveId(sectionId);   // instant highlight
-    scrollToIndex(index);     // smooth scroll
+    setActiveId(sectionId); // instant highlight
+    scrollToIndex(index); // smooth scroll
   };
 
   return (
@@ -39,7 +41,7 @@ const Sidebar = () => {
     >
       <div className="flex flex-col justify-evenly items-center gap-6 h-[50vh] w-14 px-2 py-4 rounded-e-3xl bg-zinc-900/80 border border-white/5 border-t-white/8 border-r-white/3 backdrop-blur-xl shadow-[0_4px_32px_-8px_rgba(0,0,0,0.6)]">
         {navItems.map(({ label, sectionId, Icon }, i) => {
-          const isActive = activeId === sectionId;
+          const isActive = activeId === sectionId.replace("#", "");
 
           return (
             <motion.div
@@ -50,8 +52,12 @@ const Sidebar = () => {
               animate="visible"
               className="relative group"
             >
-              <button
-                onClick={() => handleClick(sectionId)}
+              <Link
+                href={sectionId}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleClick(sectionId.replace("#", ""));
+                }}
                 aria-label={label}
                 className="relative flex items-center justify-center w-10 h-10 rounded-xl"
               >
@@ -63,7 +69,10 @@ const Sidebar = () => {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{
+                        duration: 0.25,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
                     />
                   )}
                 </AnimatePresence>
@@ -79,7 +88,7 @@ const Sidebar = () => {
                 >
                   <Icon className="text-xl" />
                 </motion.span>
-              </button>
+              </Link>
 
               <motion.span
                 initial={{ opacity: 0, x: -8 }}

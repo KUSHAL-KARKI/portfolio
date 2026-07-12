@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useCallback, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export const useFullPageScroll = (sectionIds: string[]) => {
   const isScrolling = useRef(false);
   const currentIndex = useRef(0);
   const idsRef = useRef(sectionIds);
   const [activeId, setActiveId] = useState(sectionIds[0]);
+  const pathname = usePathname();
+
+  // Only intercept scroll on the home page
+  const isHomePage = pathname === "/";
 
   const scrollToIndex = useCallback((index: number) => {
     const sections = idsRef.current
@@ -19,7 +24,6 @@ export const useFullPageScroll = (sectionIds: string[]) => {
     isScrolling.current = true;
     currentIndex.current = index;
 
-    // Update active immediately on click — don't wait for scroll to finish
     setActiveId(idsRef.current[index]);
     window.history.replaceState(null, "", `#${idsRef.current[index]}`);
 
@@ -31,6 +35,9 @@ export const useFullPageScroll = (sectionIds: string[]) => {
   }, []);
 
   useEffect(() => {
+    // Don't attach any listeners on /about, /project, etc.
+    if (!isHomePage) return;
+
     const getCurrentIndex = (): number => {
       const sections = idsRef.current
         .map((id) => document.getElementById(id))
@@ -57,15 +64,15 @@ export const useFullPageScroll = (sectionIds: string[]) => {
       const idx = getCurrentIndex();
       currentIndex.current = idx;
 
-      const next = e.deltaY > 0
-        ? Math.min(idx + 1, idsRef.current.length - 1)
-        : Math.max(idx - 1, 0);
+      const next =
+        e.deltaY > 0
+          ? Math.min(idx + 1, idsRef.current.length - 1)
+          : Math.max(idx - 1, 0);
 
       if (next === idx) return;
       scrollToIndex(next);
     };
 
-    // Also track active section when scroll settles (e.g. page load, manual scroll)
     const handleScrollEnd = () => {
       if (isScrolling.current) return;
       const idx = getCurrentIndex();
@@ -85,9 +92,10 @@ export const useFullPageScroll = (sectionIds: string[]) => {
       if (Math.abs(delta) < 50) return;
 
       const idx = getCurrentIndex();
-      const next = delta > 0
-        ? Math.min(idx + 1, idsRef.current.length - 1)
-        : Math.max(idx - 1, 0);
+      const next =
+        delta > 0
+          ? Math.min(idx + 1, idsRef.current.length - 1)
+          : Math.max(idx - 1, 0);
 
       if (next === idx) return;
       scrollToIndex(next);
@@ -98,13 +106,14 @@ export const useFullPageScroll = (sectionIds: string[]) => {
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
+    // Cleanup fires when route changes — listeners removed on /about, /project
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("scrollend", handleScrollEnd);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [scrollToIndex]);
+  }, [isHomePage, scrollToIndex]);
 
   return { activeId, setActiveId, scrollToIndex };
 };

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
+import socialLinks from "@/data/social";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,7 +87,7 @@ const Navbar = () => {
             isOpen ? "opacity-100 delay-700" : "opacity-0"
           }`}
         >
-          kushalkarki@gmail.com
+          {socialLinks[0].email}
         </div>
       </div>
     </>

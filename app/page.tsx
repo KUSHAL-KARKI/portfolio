@@ -5,6 +5,7 @@ import profile1 from "@/public/images/profile/profile1.jpeg";
 import profile2 from "@/public/images/profile/profile2.jpg";
 import contactpic from "@/public/images/profile/contact2.jpg";
 import projectpic from "@/public/images/profile/project2.jpg";
+import socialLinks from "@/data/social";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -306,36 +307,17 @@ export default function Home() {
               href="mailto:kushalkarki@gmail.com"
               className="mt-4 text-base sm:text-lg font-medium hover:text-zinc-300 transition-colors break-all"
             >
-              kushalkarki@gmail.com
+              {socialLinks[0].email}
             </motion.a>
 
             <motion.div
               variants={staggerChild}
               className="mt-8 flex justify-start gap-4"
             >
-              {[
-                {
-                  href: "mailto:kushalkarki@gmail.com",
-                  Icon: FaEnvelope,
-                  label: "Email",
-                },
-                {
-                  href: "https://github.com/KUSHAL-KARKI",
-                  Icon: FaGithub,
-                  label: "GitHub",
-                  target: "_blank",
-                },
-                {
-                  href: "https://www.linkedin.com/in/kushal-karki-2978342a3",
-                  Icon: FaLinkedin,
-                  label: "LinkedIn",
-                  target: "_blank",
-                },
-              ].map(({ href, Icon, label, target }) => (
+              {socialLinks.map(({ icon: Icon, label, link}) => (
                 <motion.a
                   key={label}
-                  href={href}
-                  target={target}
+                  href={link}
                   aria-label={label}
                   variants={fromBottom()}
                   whileHover={{ y: -6 }}
