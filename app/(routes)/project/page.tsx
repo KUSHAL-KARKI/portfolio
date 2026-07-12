@@ -43,18 +43,14 @@ export default function ProjectsPage() {
         {/* ── Featured Project ── */}
         {featured && (
           <>
-            <motion.div
-              variants={staggerContainer(0.12, 0.05)}
+            <motion.p
+              variants={staggerChild}
               {...inView}
-              className="mb-12 sm:mb-16"
+              className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-8 sm:mb-10"
             >
-              <motion.h1
-                variants={staggerChild}
-                className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-8"
-              >
-                <span className="text-white">★</span> Featured Project
-              </motion.h1>
-            </motion.div>
+              <span className="text-white">★</span> Featured Project
+            </motion.p>
+
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 lg:items-center mb-16 sm:mb-24">
               {/* Hero image */}
               <motion.div
@@ -152,23 +148,21 @@ export default function ProjectsPage() {
           </>
         )}
 
+              {/* ── Divider ── */}
+
+<div className="my-20 h-px w-full bg-zinc-800" />
+
         {/* ── Other Projects ── */}
         {rest.length > 0 && (
           <>
-            <div className="w-full bg-zinc-800 mb-10 sm:mb-12" />
 
-                 <motion.div
-              variants={staggerContainer(0.12, 0.05)}
+            <motion.p
+              variants={staggerChild}
               {...inView}
-              className="mb-10 sm:mb-12"
+              className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-8"
             >
-              <motion.h1
-                variants={staggerChild}
-                className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-8"
-              >
-               Other Projects
-              </motion.h1>
-            </motion.div>
+              Other Projects
+            </motion.p>
 
             <motion.div
               variants={staggerContainer(0.15, 0.1)}
